@@ -9,8 +9,13 @@ if (!$day || $day < 1 || $day > 24) {
 } elseif (!$part || $part < 1 || $part > 2) {
     echo "Enter the part number as second argument (1 or 2)";
 } else {
-    include 'day' . sprintf('%02d', $day) . '.php';
-    $obj = new solution($day);
-    $obj->run($part);
+    $file = 'day' . sprintf('%02d', $day) . '.php';
+    if (file_exists($file)) {
+        include $file;
+        $obj = new solution($day);
+        $obj->run($part);
+    } else {
+        echo "Assignment for day " . $day . " not completed yet :-(";
+    }
 }
 ?>

@@ -21,29 +21,39 @@ class solution extends abstractSolution
             ],
         ];
         $convert = ['X' => 'A', 'Y' => 'B', 'Z' => 'C'];
+        $defeats = ['A' => 'C', 'B' => 'A', 'C' => 'B'];
+        $loses   = array_flip($defeats);
 
         $totalPoints = 0;
         foreach ($this->data as $line) {
-            $yourChoiceKey = $line[0];
-            $myChoiceKey   = $convert[$line[2]];
-            $yourChoice    = $options[$yourChoiceKey];
-            $myChoice      = $options[$myChoiceKey];
+            $yourChoice = $line[0];
+            if ($partNr == 2) {
+                if ($line[2] == 'X') {
+                    $myChoice = $defeats[$yourChoice];
+                } elseif ($line[2] == 'Z') {
+                    $myChoice = $loses[$yourChoice];
+                } else {
+                    $myChoice = $yourChoice;
+                }
+            } else {
+                $myChoice   = $convert[$line[2]];
+            }
 
             $wins = null;
-            if ($yourChoice['defeats'] == $myChoiceKey) {
+            if ($defeats[$yourChoice] == $myChoice) {
                 $wins = 'you';
-            } elseif ($myChoice['defeats'] == $yourChoiceKey) {
+            } elseif ($defeats[$myChoice] == $yourChoice) {
                 $wins = 'me';
             }
 
-            $this->output($yourChoice['name'], $wins == 'you' ? 'green' : null, false);
+            $this->output($options[$yourChoice]['name'], $wins == 'you' ? 'green' : null, false);
             $this->output(' vs ', null, false);
-            $this->output($myChoice['name'], $wins == 'me' ? 'green' : null, false);
+            $this->output($options[$myChoice]['name'], $wins == 'me' ? 'green' : null, false);
 
-            $length = strlen($yourChoice['name'] . $myChoice['name']) + 4;
+            $length = strlen($options[$yourChoice]['name'] . $options[$myChoice]['name']) + 4;
             $this->output(str_repeat(' ', 25 - $length), null, false);
 
-            $points = $myChoice['points'] + ($wins ? ($wins == 'me' ? 6 : 0) : 3);
+            $points = $options[$myChoice]['points'] + ($wins ? ($wins == 'me' ? 6 : 0) : 3);
             $this->output(' -> ' . $points);
             $totalPoints += $points;
         }
