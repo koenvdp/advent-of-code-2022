@@ -6,17 +6,14 @@ class solution extends abstractSolution
         $options = [
             'A' => [
                 'name'    => 'Rock',
-                'defeats' => 'C',
                 'points'  => 1,
             ],
             'B' => [
                 'name'    => 'Paper',
-                'defeats' => 'A',
                 'points'  => 2,
             ],
             'C' => [
                 'name'    => 'Scissors',
-                'defeats' => 'B',
                 'points'  => 3,
             ],
         ];
