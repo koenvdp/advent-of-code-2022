@@ -13,7 +13,7 @@ abstract class AbstractSolution {
     {
         $fileName = 'data/day' . sprintf('%02d', $day)  . '.txt';
         if (!file_exists($fileName)) {
-            output('ERROR: file does not exist', 'red', true);
+            $this->output('ERROR: file does not exist', 'red', true);
         }
         $lines = file($fileName);
         $data = [];
@@ -23,6 +23,25 @@ abstract class AbstractSolution {
         }
 
         return $data;
+    }
+
+    public function run($partNr)
+    {
+        if ($partNr == 2) {
+            $this->part2();
+        } else {
+            $this->part1();
+        }
+    }
+
+    protected function part1()
+    {
+
+    }
+
+    protected function part2()
+    {
+
     }
 
     function output($txt, $color = null, $newline = true, $die = false)

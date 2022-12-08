@@ -1,16 +1,7 @@
 <?php
 class solution extends abstractSolution
 {
-    public function run($partNr)
-    {
-        if ($partNr == 2) {
-            $this->part2();
-        } else {
-            $this->part1();
-        }
-    }
-
-    private function part1()
+    protected function part1()
     {
         $sum = 0;
         foreach ($this->data as $line) {
@@ -33,7 +24,7 @@ class solution extends abstractSolution
         $this->output("\nSum: " . $sum, 'blue');
     }
 
-    private function part2()
+    protected function part2()
     {
         $sum = 0;
         $max = count($this->data);
